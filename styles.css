@@ -328,3 +328,61 @@
   .editorial-feature__visual img,.editorial-feature__link{transition:none}
   .editorial-feature__visual:hover img{transform:none}
 }
+
+/* WOMEN'S EDIT: companion to the men's feature.
+   Reversed editorial arrangement; the existing plum abaya remains an
+   unboxed transparent cutout on the same warm, uninterrupted page surface. */
+.editorial-feature--women{
+  padding-top:0;
+  padding-bottom:100px;
+}
+.editorial-feature--women .editorial-feature__inner{
+  grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);
+  gap:clamp(36px,7vw,125px);
+}
+.editorial-feature--women .editorial-feature__copy{
+  grid-column:1;
+  grid-row:1;
+  padding-left:clamp(0px,3.2vw,55px);
+}
+.editorial-feature--women .editorial-feature__visual{
+  grid-column:2;
+  grid-row:1;
+}
+.editorial-feature--women .editorial-feature__copy h2 em{
+  color:#855969;
+}
+.editorial-feature--women .editorial-feature__eyebrow{
+  color:#986d79;
+}
+.editorial-feature--women .editorial-feature__rule{
+  background:#a67b88;
+}
+.editorial-feature--women .editorial-feature__link{
+  border-color:#a67b88;
+}
+.editorial-feature--women .editorial-feature__link:hover{
+  color:#855969;
+}
+@media(max-width:950px){
+  .editorial-feature--women .editorial-feature__inner{
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+  }
+  .editorial-feature--women .editorial-feature__copy{padding-left:0}
+}
+@media(max-width:680px){
+  .editorial-feature--women{padding-top:0;padding-bottom:75px}
+  .editorial-feature--women .editorial-feature__inner{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .editorial-feature--women .editorial-feature__visual{
+    order:0;
+  }
+  .editorial-feature--women .editorial-feature__copy{
+    order:1;
+    padding-left:0;
+  }
+}
