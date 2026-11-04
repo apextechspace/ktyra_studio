@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./men.css">
   <link rel="stylesheet" href="./product.css">
+  <script src="./shop-data.js" defer></script>
   <script src="./product.js" defer></script>
 </head>
 <body class="product-page">
@@ -64,7 +65,7 @@
       <div class="product-accordions">
         <details open><summary>Design details</summary><p id="detailsText">Refined lines and timeless form, presented as a concept garment.</p></details>
         <details><summary>Delivery and returns</summary><p>No live shipping, return policy, or transactions are configured for this portfolio demonstration.</p></details>
-        <details><summary>Pricing and currencies</summary><p>NGN is the base price. USD and GBP are estimates based on a public reference FX feed when available. They are not offered as checkout or settlement currencies.</p></details>
+        <details><summary>Pricing and currencies</summary><p>NGN is the base price. USD and GBP use fixed fictional demonstration rates for the visual design, not live currency conversion. No real checkout or settlement occurs.</p></details>
       </div>
     </div>
   </section>
@@ -93,6 +94,7 @@
   <div id="bagItems"></div>
   <div class="bag-total"><span>Estimated subtotal <small>(NGN)</small></span><strong id="bagTotal">₦0</strong></div>
   <p class="product-demonote">Demonstration only. Items are saved on this device. No checkout, taxes or shipping charges are provided.</p>
+  <a class="checkout-link" href="./checkout.html" id="proceedCheckout" hidden>Continue to Demo Checkout <span aria-hidden="true">↗</span></a>
   <button type="button" id="continueShopping" class="dialog-action">Continue exploring</button>
 </dialog>
 <div class="mens-toast" id="productToast" role="status" aria-live="polite"></div>

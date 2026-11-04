@@ -103,3 +103,8 @@
  .product-detail__visual img,.product-add,.product-discover__links a{transition:none}
  .product-discover__links a:hover{transform:none}
 }
+
+/* Visible demo checkout action within the persisted local shopping bag. */
+.checkout-link{display:inline-flex;justify-content:space-between;align-items:center;gap:15px;width:100%;background:#392921;color:#fff8ee;padding:15px 20px;border-radius:27px;font-size:12px;font-weight:700;margin:18px 0 0}
+.checkout-link:hover{background:#80553d;color:white}
+.checkout-link[hidden]{display:none!important}

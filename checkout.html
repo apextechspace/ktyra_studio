@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#241a18">
+<meta name="description" content="KTYRA STUDIO frontend-only checkout design demonstration. No payment or real order is processed.">
+<title>Demo Checkout | KTYRA STUDIO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./men.css">
+<link rel="stylesheet" href="./checkout.css">
+<script src="./shop-data.js" defer></script>
+<script src="./checkout.js" defer></script>
+</head>
+<body class="checkout-page">
+<header class="mens-header checkout-header">
+  <nav class="nav" aria-label="Primary navigation">
+    <a class="brand" href="./index.html" aria-label="KTYRA STUDIO homepage"><span class="mark" aria-hidden="true">K</span><span><strong>KTYRA</strong><small>STUDIO</small></span></a>
+    <div class="navlinks"><a href="./index.html">Home</a><a href="./men.html">Men</a><a href="./women.html">Women</a><a href="./index.html#story">Our Story</a></div>
+    <div class="checkout-header__caption">SECURE-LOOKING DESIGN · NO REAL PAYMENT</div>
+    <div class="navright">
+      <a class="checkout-back" href="./product.html#bag"><span aria-hidden="true">←</span> Your bag</a>
+      <details class="mobile-menu"><summary aria-label="Open navigation menu"><span class="menu-lines" aria-hidden="true"><span></span><span></span><span></span></span><span>Menu</span></summary><nav class="mobile-menu-links" aria-label="Mobile navigation"><a href="./index.html">Home</a><a href="./men.html">Men's Thobes</a><a href="./women.html">Women's Collection</a><a href="./product.html#bag">Your Demo Bag</a></nav></details>
+    </div>
+  </nav>
+</header>
+<main>
+  <div class="checkout-top"><div class="checkout-top__trail"><a href="./index.html">HOME</a><span aria-hidden="true">/</span><a href="./product.html#bag">BAG</a><span aria-hidden="true">/</span><span>DEMO CHECKOUT</span></div>
+    <span class="checkout-edition">KTYRA STUDIO / THE CHECKOUT EDIT</span></div>
+  <div class="checkout-layout">
+    <section class="checkout-main" aria-labelledby="checkoutTitle">
+      <div class="checkout-heading"><span class="checkout-overline">01 / FINAL DETAILS</span><h1 id="checkoutTitle">The final <em>touch.</em></h1><p>Complete the visual checkout experience. This is a frontend demonstration: no order is sent, no payment is taken, and the information entered is not transmitted.</p></div>
+      <div class="checkout-demo-notice" role="note"><strong>DESIGN PREVIEW ONLY</strong><span>Please use sample information. No real purchasing, delivery or payment is available.</span></div>
+      <div id="checkoutEmpty" class="checkout-empty" hidden>
+        <h2>Your bag is awaiting a piece.</h2>
+        <p>Explore a signature silhouette before returning to the demo checkout.</p>
+        <a href="./men.html">Explore the collection <span aria-hidden="true">↗</span></a>
+      </div>
+      <form id="checkoutForm" class="checkout-form" novalidate>
+        <fieldset>
+          <legend><span>01</span> Contact details</legend>
+          <div class="checkout-fieldrow">
+            <div class="checkout-field"><label for="fullName">Full name <span aria-hidden="true">*</span></label><input id="fullName" name="fullName" autocomplete="off" type="text" minlength="2" maxlength="80" placeholder="Your name (demo)" required></div>
+            <div class="checkout-field"><label for="email">Email address <span aria-hidden="true">*</span></label><input id="email" name="email" type="email" autocomplete="off" placeholder="example@demo.com" required></div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend><span>02</span> Delivery preview</legend>
+          <div class="checkout-field"><label for="address">Address <span aria-hidden="true">*</span></label><input id="address" name="address" type="text" autocomplete="off" maxlength="160" placeholder="Sample street address" required></div>
+          <div class="checkout-fieldrow">
+            <div class="checkout-field"><label for="city">City <span aria-hidden="true">*</span></label><input id="city" name="city" type="text" autocomplete="off" maxlength="75" placeholder="Sample city" required></div>
+            <div class="checkout-field"><label for="country">Country <span aria-hidden="true">*</span></label><select id="country" name="country" required><option value="Nigeria">Nigeria</option><option value="United Kingdom">United Kingdom</option><option value="United States">United States</option><option value="Other">Other (demo)</option></select></div>
+          </div>
+          <p class="checkout-quiet">Shipping options, fees and delivery dates are not calculated in this design prototype.</p>
+        </fieldset>
+        <fieldset>
+          <legend><span>03</span> Payment demonstration</legend>
+          <p class="checkout-quiet">Choose a visual payment method. No card numbers, banking credentials or transactions are required.</p>
+          <div class="checkout-payments" role="radiogroup" aria-label="Payment demonstration type">
+            <label class="checkout-payment"><input type="radio" name="demoPayment" value="Demo card" checked><span><strong>Demo card</strong><small>Presentation only · no payment fields</small></span><span class="checkout-payment__symbol" aria-hidden="true">◇</span></label>
+            <label class="checkout-payment"><input type="radio" name="demoPayment" value="Demo bank transfer"><span><strong>Demo bank transfer</strong><small>Presentation only · no account details</small></span><span class="checkout-payment__symbol" aria-hidden="true">↗</span></label>
+          </div>
+        </fieldset>
+        <label class="checkout-confirm"><input id="demoAcknowledgement" type="checkbox" required><span>I understand this is a design demonstration and does not place a real order.</span></label>
+        <button class="checkout-submit" id="placeDemoOrder" type="submit">Complete Demo Checkout <span aria-hidden="true">↗</span></button>
+        <p class="checkout-help">Nothing is charged, shipped or stored as a customer order. Your form entries are not saved.</p>
+      </form>
+    </section>
+    <aside class="checkout-summary" aria-label="Your demo order summary">
+      <div class="checkout-summary__heading"><span>YOUR SELECTION</span><span id="summaryCount">0 PIECES</span></div>
+      <div id="summaryItems" class="checkout-summary__items"></div>
+      <div class="checkout-summary__divider"></div>
+      <div class="checkout-currency"><label for="summaryCurrency">DISPLAY CURRENCY</label><select id="summaryCurrency"><option value="NGN">NGN · ₦</option><option value="USD">USD · $</option><option value="GBP">GBP · £</option></select></div>
+      <div class="checkout-summary__row"><span>Products <small>(demo)</small></span><strong id="summarySubtotal">₦0</strong></div>
+      <div class="checkout-summary__row"><span>Delivery</span><span>Not calculated</span></div>
+      <div class="checkout-summary__total"><span>Illustrative subtotal</span><strong id="summaryTotal">₦0</strong></div>
+      <p id="currencyDisclosure" class="checkout-summary__disclosure">NGN is the design's base currency. These are illustrative prices, not real offers.</p>
+      <a class="checkout-summary__edit" href="./product.html#bag">Edit demo bag <span aria-hidden="true">↗</span></a>
+    </aside>
+  </div>
+</main>
+<footer class="checkout-footer"><span>© 2026 KTYRA STUDIO · Portfolio concept</span><span>Wear Your Presence</span></footer>
+</body>
+</html>
