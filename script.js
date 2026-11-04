@@ -49,6 +49,7 @@ function render(){
   document.getElementById('productEdition').textContent=data.edition;
   document.getElementById('productTitle').textContent=data.title;
   document.getElementById('productDetail').textContent=data.detail;
+  document.getElementById('collectionLink').href=category==='thobes'?'#men-collection':category==='abayas'?'#women-collection':'#khimars-collection';
   document.getElementById('shadeName').textContent=item.name;
   document.getElementById('slideCount').textContent=String(index+1).padStart(2,'0')+' / '+String(data.items.length).padStart(2,'0');
   document.getElementById('selectionNumber').textContent=String(index+1).padStart(2,'0')+' — '+String(data.items.length).padStart(2,'0');
@@ -81,3 +82,6 @@ stage.addEventListener('touchend',e=>{if(swipeX===null)return;const movement=e.c
 document.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey||['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(e.key==='ArrowLeft')selectShade(index-1);if(e.key==='ArrowRight')selectShade(index+1)});
 document.getElementById('bag').addEventListener('click',()=>notify('KTYRA STUDIO is a portfolio concept. Shopping is coming later.'));
 render();
+
+// Close the compact mobile menu after a navigation choice.
+document.querySelectorAll('.mobile-menu-links a').forEach(link=>link.addEventListener('click',()=>{const menu=document.querySelector('.mobile-menu');if(menu)menu.open=false;}));
