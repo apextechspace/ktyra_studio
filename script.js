@@ -85,3 +85,12 @@ render();
 
 // Close the compact mobile menu after a navigation choice.
 document.querySelectorAll('.mobile-menu-links a').forEach(link=>link.addEventListener('click',()=>{const menu=document.querySelector('.mobile-menu');if(menu)menu.open=false;}));
+
+// Editorial link opens the relevant collection in the existing live hero.
+// This is a functional in-page destination until collection pages are built.
+document.querySelectorAll('[data-featured-category]').forEach(link=>{
+  link.addEventListener('click',()=>{
+    const next=link.dataset.featuredCategory;
+    if(collections[next])selectCategory(next);
+  });
+});
