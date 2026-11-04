@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#221917">
+  <meta name="description" content="Explore the details of KTYRA STUDIO's signature modestwear. Discover shades, sizes and indicative multi-currency demo pricing.">
+  <title>Product Details | KTYRA STUDIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./men.css">
+  <link rel="stylesheet" href="./product.css">
+  <script src="./product.js" defer></script>
+</head>
+<body class="product-page">
+<header class="mens-header product-header">
+  <nav class="nav" aria-label="Primary navigation">
+    <a class="brand" href="./index.html" aria-label="KTYRA STUDIO homepage"><span class="mark" aria-hidden="true">K</span><span><strong>KTYRA</strong><small>STUDIO</small></span></a>
+    <div class="navlinks">
+      <a href="./index.html">Home</a><a href="./index.html#collections">Collections</a>
+      <a href="./men.html">Men</a><a href="./women.html">Women</a>
+      <a href="./index.html#story">Our Story</a>
+    </div>
+    <div class="navright">
+      <button type="button" class="iconbtn product-bag-button" id="openBag" aria-label="Open demo shopping bag"><svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h16l-1 12H5L4 8Z"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/></svg><span id="bagCount">0</span></button>
+      <details class="mobile-menu"><summary aria-label="Open navigation menu"><span class="menu-lines" aria-hidden="true"><span></span><span></span><span></span></span><span>Menu</span></summary>
+        <nav class="mobile-menu-links" aria-label="Mobile navigation"><a href="./index.html">Home</a><a href="./men.html">Men's Thobes</a><a href="./women.html?category=abayas#collection">Signature Abayas</a><a href="./women.html?category=khimars#collection">Full Khimars</a><a href="./index.html#story">Our Story</a></nav>
+      </details>
+    </div>
+  </nav>
+</header>
+<main>
+  <div class="product-crumbs">
+    <a href="./index.html">Home</a><span aria-hidden="true">/</span>
+    <a id="crumbCollection" href="./men.html">Men's Collection</a><span aria-hidden="true">/</span>
+    <span id="crumbProduct" aria-current="page">The Classic Thobe</span>
+  </div>
+  <section class="product-detail" aria-labelledby="productName">
+    <div class="product-detail__visual">
+      <p class="product-detail__image-index">KTYRA STUDIO <span aria-hidden="true">/</span> THE SIGNATURE EDIT</p>
+      <div class="product-detail__arch" aria-hidden="true"></div>
+      <div class="product-detail__ground" aria-hidden="true"></div>
+      <img id="productImage" src="./assets/products/men/thobes/classic-thobe-pearl-white.webp" alt="Pearl White Classic Thobe" width="760" height="1040" fetchpriority="high">
+      <p class="product-detail__image-caption" id="imageCaption">PEARL WHITE / THE CLASSIC THOBE</p>
+    </div>
+    <div class="product-detail__content">
+      <span class="product-overline" id="productKicker">THE MEN'S EDIT</span>
+      <h1 id="productName">The Classic <em>Thobe.</em></h1>
+      <p id="productDescription" class="product-detail__description">A considered expression of timeless modestwear, with clean lines and a distinctive silhouette.</p>
+      <div class="product-price-line">
+        <div><p class="product-price-label">DEMONSTRATION PRICE</p><div class="product-price" id="productPrice" aria-live="polite">₦95,000</div></div>
+        <div><label for="currencySelect" class="product-currency-label">CURRENCY</label><select id="currencySelect"><option value="NGN">NGN — ₦</option><option value="USD">USD — $</option><option value="GBP">GBP — £</option></select></div>
+      </div>
+      <p id="rateNotice" class="product-rate-notice" aria-live="polite">Illustrative price only. No purchase or payment is being processed.</p>
+      <div class="product-option"><div class="product-option__top"><span>SELECT SHADE</span><strong id="selectedShade">Pearl White</strong></div><div class="product-shades" id="shadeButtons" role="group" aria-label="Garment shade"></div></div>
+      <div class="product-option"><div class="product-option__top"><label for="sizeSelect">SELECT SIZE</label><button type="button" id="sizeGuide" class="text-link">Size guidance <span aria-hidden="true">↗</span></button></div><select id="sizeSelect" class="product-size" required><option value="">Choose a size</option></select></div>
+      <div class="product-option"><div class="product-option__top"><span>QUANTITY</span></div>
+        <div class="product-quantity" role="group" aria-label="Quantity"><button id="decreaseQty" type="button" aria-label="Decrease quantity">−</button><output id="quantity" aria-live="polite">1</output><button id="increaseQty" type="button" aria-label="Increase quantity">+</button></div>
+      </div>
+      <button class="product-add" id="addToBag" type="button">Add to Demo Bag <span aria-hidden="true">↗</span></button>
+      <p class="product-demonote">Portfolio demonstration only. Sizes, descriptions and prices are illustrative; availability and checkout are not connected to a store.</p>
+      <div class="product-accordions">
+        <details open><summary>Design details</summary><p id="detailsText">Refined lines and timeless form, presented as a concept garment.</p></details>
+        <details><summary>Delivery and returns</summary><p>No live shipping, return policy, or transactions are configured for this portfolio demonstration.</p></details>
+        <details><summary>Pricing and currencies</summary><p>NGN is the base price. USD and GBP are estimates based on a public reference FX feed when available. They are not offered as checkout or settlement currencies.</p></details>
+      </div>
+    </div>
+  </section>
+  <section class="product-discover" aria-labelledby="discoverTitle">
+    <span class="product-overline">CURATED FOR PRESENCE</span>
+    <h2 id="discoverTitle">Explore the <em>collection.</em></h2>
+    <div class="product-discover__links">
+      <a href="./men.html"><span>01 / MEN</span><strong>Classic Thobes</strong><span aria-hidden="true">↗</span></a>
+      <a href="./women.html?category=abayas#collection"><span>02 / WOMEN</span><strong>Signature Abayas</strong><span aria-hidden="true">↗</span></a>
+      <a href="./women.html?category=khimars#collection"><span>03 / WOMEN</span><strong>Full Khimars</strong><span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+</main>
+<footer class="mens-footer"><span>© 2026 KTYRA STUDIO · Portfolio concept</span><span>Designed &amp; developed as a KTYRA Technologies showcase</span></footer>
+<dialog class="product-dialog" id="sizeDialog" aria-labelledby="sizeTitle">
+  <button id="closeSize" type="button" class="dialog-close" aria-label="Close size guidance">×</button>
+  <span class="product-overline">FIND YOUR FIT</span>
+  <h2 id="sizeTitle">Size guidance.</h2>
+  <p>These sizes are illustrative placeholders for the portfolio. Actual measurements must be supplied and verified before real orders are accepted. Full khimars are shown as one-size concepts.</p>
+  <button type="button" class="dialog-action" id="dismissSize">Understood</button>
+</dialog>
+<dialog class="product-dialog product-bag-dialog" id="bagDialog" aria-labelledby="bagTitle">
+  <button class="dialog-close" id="closeBag" type="button" aria-label="Close shopping bag">×</button>
+  <span class="product-overline">YOUR SELECTION</span>
+  <h2 id="bagTitle">The demo bag.</h2>
+  <div id="bagItems"></div>
+  <div class="bag-total"><span>Estimated subtotal <small>(NGN)</small></span><strong id="bagTotal">₦0</strong></div>
+  <p class="product-demonote">Demonstration only. Items are saved on this device. No checkout, taxes or shipping charges are provided.</p>
+  <button type="button" id="continueShopping" class="dialog-action">Continue exploring</button>
+</dialog>
+<div class="mens-toast" id="productToast" role="status" aria-live="polite"></div>
+</body>
+</html>

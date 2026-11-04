@@ -33,7 +33,7 @@ function renderProducts(){
       '<p class="men-product__kicker">THE CLASSIC THOBE</p>'+
       '<h3>'+item.name+'</h3>'+
       '<p class="men-product__sub">'+item.note+'</p>'+
-    '</div><span class="men-product__swatch" style="--shade:'+item.hex+'" aria-label="'+item.name+' color swatch" role="img"></span></div>'+
+    '<a class="product-details-link" href="./product.html?category=thobes&shade='+item.slug+'" aria-label="View product details for '+item.name+' Classic Thobe">View details ↗</a></div><span class="men-product__swatch" style="--shade:'+item.hex+'" aria-label="'+item.name+' color swatch" role="img"></span></div>'+
     '</article>';
   }).join('');
   count.textContent='Showing '+visible.length+' '+(visible.length===1?'shade':'shades');
@@ -59,6 +59,7 @@ function selectShade(slug){
   previewImage.alt=found.name+' Classic Thobe';
   previewName.textContent='The Classic Thobe';
   previewShade.textContent=found.name;
+  document.getElementById('previewProductLink').href='./product.html?category=thobes&shade='+encodeURIComponent(found.slug);
   renderModalSwatches();
 }
 function openPreview(slug){
@@ -84,13 +85,14 @@ dialog.addEventListener('keydown',event=>{
   const delta=event.key==='ArrowRight'?1:-1;
   selectShade(MEN_SHADES[(current+delta+MEN_SHADES.length)%MEN_SHADES.length].slug);
 });
-const toast=document.getElementById('mensToast');
-document.getElementById('menBag').addEventListener('click',()=>{
-  toast.textContent='Shopping bag and checkout will be introduced in the product-details phase.';
-  toast.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>toast.classList.remove('show'),3200);
-});
+function demoBagCount(){
+ try{
+  const entries=JSON.parse(localStorage.getItem('ktyra-studio-demo-cart-v1')||'[]');
+  return Array.isArray(entries)?entries.reduce((n,x)=>n+(Number.isInteger(x.quantity)&&x.quantity>0&&x.quantity<=10?x.quantity:0),0):0;
+ }catch{return 0;}
+}
+document.querySelector('#menBag span').textContent=String(demoBagCount());
+document.getElementById('menBag').addEventListener('click',()=>{location.href='./product.html#bag';});
 document.querySelectorAll('.mobile-menu-links a').forEach(link=>link.addEventListener('click',()=>{
   const menu=document.querySelector('.mobile-menu');
   if(menu)menu.open=false;

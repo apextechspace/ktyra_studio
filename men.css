@@ -145,3 +145,9 @@
  .men-product__image,.men-product__image img,.men-product__image:after,.mens-hero__link{transition:none}
  .men-product__image:hover img{transform:none}
 }
+
+/* Shared product-detail invitations from catalog and preview dialogs. */
+.product-details-link{display:inline-block;margin-top:12px;color:#6f503e;font-size:11px;font-weight:700;border-bottom:1px solid #bfa28a;padding-bottom:5px}
+.product-details-link:hover{color:#9d6e4c}
+.preview-product-link{display:inline-flex;align-items:center;justify-content:center;gap:14px;padding:13px 19px;border-radius:26px;background:#31231e;color:#fcf7f0;font-size:12px;font-weight:700;margin:12px 0 14px}
+.preview-product-link:hover{background:#71513e;color:#fff}

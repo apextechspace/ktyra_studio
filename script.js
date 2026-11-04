@@ -80,7 +80,15 @@ let swipeX=null;const stage=document.getElementById('stage');
 stage.addEventListener('touchstart',e=>{swipeX=e.changedTouches[0].clientX},{passive:true});
 stage.addEventListener('touchend',e=>{if(swipeX===null)return;const movement=e.changedTouches[0].clientX-swipeX;swipeX=null;if(Math.abs(movement)>50)selectShade(index+(movement<0?1:-1))},{passive:true});
 document.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey||['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(e.key==='ArrowLeft')selectShade(index-1);if(e.key==='ArrowRight')selectShade(index+1)});
-document.getElementById('bag').addEventListener('click',()=>notify('KTYRA STUDIO is a portfolio concept. Shopping is coming later.'));
+// Use the same local demo bag across the homepage and collection pages.
+function demoBagCount(){
+ try{
+  const entries=JSON.parse(localStorage.getItem('ktyra-studio-demo-cart-v1')||'[]');
+  return Array.isArray(entries)?entries.reduce((n,x)=>n+(Number.isInteger(x.quantity)&&x.quantity>0&&x.quantity<=10?x.quantity:0),0):0;
+ }catch{return 0;}
+}
+document.getElementById('count').textContent=String(demoBagCount());
+document.getElementById('bag').addEventListener('click',()=>{location.href='./product.html#bag';});
 render();
 
 // Close the compact mobile menu after a navigation choice.

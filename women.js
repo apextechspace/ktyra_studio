@@ -64,7 +64,7 @@ function drawCatalog(){
         '<div class="womens-product__details"><div>'+
           '<p class="womens-product__kicker">'+collection.kicker+'</p>'+
           '<h4>'+shade.name+'</h4>'+
-          '<p>'+shade.note+'</p>'+
+          '<p>'+shade.note+'</p>'+ '<a class="product-details-link" href="./product.html?category='+group+'&shade='+shade.slug+'" aria-label="View product details for '+shade.name+' '+collection.singular+'">View details ↗</a>'+
         '</div><span class="womens-product__swatch" role="img" aria-label="'+shade.name+' shade" style="--shade:'+shade.color+'"></span></div>'+
       '</article>';
     }).join('');
@@ -98,6 +98,7 @@ function drawPreview(){
   previewTitle.textContent=collection.singular;
   previewKicker.textContent='THE WOMEN\'S EDIT / '+collection.name.toUpperCase();
   previewShade.textContent=activeShade.name;
+  document.getElementById('previewProductLink').href='./product.html?category='+encodeURIComponent(activeGroup)+'&shade='+encodeURIComponent(activeShade.slug);
   previewDescription.textContent=collection.preview;
   previewSwatches.innerHTML=SHADES.map(s=>'<button type="button" data-preview-color="'+s.slug+'" style="--shade:'+s.color+'" aria-label="Select '+s.name+'" title="'+s.name+'" aria-pressed="'+String(activeShade.slug===s.slug)+'"></button>').join('');
 }
@@ -143,12 +144,14 @@ document.querySelectorAll('[data-select-category]').forEach(link=>link.addEventL
 const categoryFromQuery=new URLSearchParams(window.location.search).get('category');
 if(validCategory(categoryFromQuery))selectedCategory=categoryFromQuery;
 setCategory(selectedCategory);
-document.getElementById('womenBag').addEventListener('click',()=>{
-  toast.textContent='The shopping bag will be available in the product-details phase.';
-  toast.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>toast.classList.remove('show'),3200);
-});
+function demoBagCount(){
+ try{
+  const entries=JSON.parse(localStorage.getItem('ktyra-studio-demo-cart-v1')||'[]');
+  return Array.isArray(entries)?entries.reduce((n,x)=>n+(Number.isInteger(x.quantity)&&x.quantity>0&&x.quantity<=10?x.quantity:0),0):0;
+ }catch{return 0;}
+}
+document.querySelector('#womenBag span').textContent=String(demoBagCount());
+document.getElementById('womenBag').addEventListener('click',()=>{location.href='./product.html#bag';});
 document.querySelectorAll('.mobile-menu-links a').forEach(link=>link.addEventListener('click',()=>{
   const menu=document.querySelector('.mobile-menu');
   if(menu)menu.open=false;
