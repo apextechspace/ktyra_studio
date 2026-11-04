@@ -1,19 +1,83 @@
 'use strict';
-const colors=[{name:'Pearl White',fabric:'#f3f0e8',shadow:'#bdb6aa',light:'#fffefa',ambient:'#765544',glow:'#d6a46b',sw:'#f3f0e8'},{name:'Desert Sand',fabric:'#c8ad8a',shadow:'#80664c',light:'#e7d3b3',ambient:'#79583a',glow:'#e3b779',sw:'#c8ad8a'},{name:'Midnight Navy',fabric:'#233650',shadow:'#101b2d',light:'#526c8c',ambient:'#293e54',glow:'#75a9da',sw:'#233650'},{name:'Graphite',fabric:'#64666a',shadow:'#2b2c30',light:'#999a9c',ambient:'#464348',glow:'#b8a6a2',sw:'#64666a'},{name:'Onyx Black',fabric:'#222124',shadow:'#0a090b',light:'#525155',ambient:'#332c30',glow:'#ba9477',sw:'#222124'}];
-const ghutras=[{name:'Pearl White',color:'#f3f0e8',shadow:'#bdb6aa'},{name:'Desert Sand',color:'#c8ad8a',shadow:'#80664c'},{name:'Midnight Navy',color:'#233650',shadow:'#101b2d'},{name:'Onyx Black',color:'#222124',shadow:'#0a090b'}];
-let current=0,ghutraIndex=0,selectedSize='M',bagCount=0,toastTimer;
-const root=document.documentElement,swatches=document.querySelector('#swatches'),ghutraSwatches=document.querySelector('#ghutraSwatches'),garment=document.querySelector('#garment');
-function makeSwatch({name,color,index,parent,action}){const b=document.createElement('button');b.type='button';b.className='swatch'+(!index?' active':'');b.style.setProperty('--sw',color);b.title=name;b.setAttribute('aria-label',name);b.setAttribute('aria-pressed',String(!index));b.addEventListener('click',()=>action(index));parent.appendChild(b)}
-colors.forEach((c,i)=>makeSwatch({name:c.name,color:c.sw,index:i,parent:swatches,action:setColor}));
-ghutras.forEach((g,i)=>makeSwatch({name:g.name,color:g.color,index:i,parent:ghutraSwatches,action:setGhutra}));
-function activeSwatch(parent,index){[...parent.children].forEach((b,j)=>{const selected=j===index;b.classList.toggle('active',selected);b.setAttribute('aria-pressed',String(selected))})}
-function animateGarment(){garment.classList.remove('swap');void garment.offsetWidth;garment.classList.add('swap')}
-function setGhutra(i){ghutraIndex=i;const g=ghutras[i];root.style.setProperty('--ghutra',g.color);root.style.setProperty('--ghutra-shadow',g.shadow);document.querySelector('#ghutraName').textContent=g.name;activeSwatch(ghutraSwatches,i);animateGarment()}
-function setColor(i){current=(i+colors.length)%colors.length;const c=colors[current];for(const [k,v] of Object.entries({fabric:c.fabric,'fabric-shadow':c.shadow,'fabric-light':c.light,ambient:c.ambient,glow:c.glow}))root.style.setProperty('--'+k,v);document.querySelector('#shadeName').textContent=c.name;document.querySelector('.caption-stage').textContent='A STUDY IN TIMELESS FORM · 0'+(current+1)+' / 05';activeSwatch(swatches,current);animateGarment()}
-document.querySelector('#prev').addEventListener('click',()=>setColor(current-1));document.querySelector('#next').addEventListener('click',()=>setColor(current+1));
-document.querySelectorAll('.size').forEach(b=>b.addEventListener('click',()=>{selectedSize=b.textContent;document.querySelectorAll('.size').forEach(x=>{const selected=x===b;x.classList.toggle('active',selected);x.setAttribute('aria-pressed',String(selected))})}));
-let sx=0;const stage=document.querySelector('#stage');stage.addEventListener('touchstart',e=>{sx=e.changedTouches[0].clientX},{passive:true});stage.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>45)setColor(current+(d<0?1:-1))},{passive:true});
-document.addEventListener('keydown',e=>{const t=document.activeElement?.tagName;if(['INPUT','TEXTAREA','SELECT'].includes(t))return;if(e.key==='ArrowLeft')setColor(current-1);if(e.key==='ArrowRight')setColor(current+1)});
-function notify(message){const el=document.querySelector('#toast');el.textContent=message;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),3200)}
-document.querySelector('#add').addEventListener('click',()=>{bagCount++;document.querySelector('#count').textContent=bagCount;notify(colors[current].name+' · Size '+selectedSize+' with '+ghutras[ghutraIndex].name+' ghutra added to demo bag')});
-document.querySelector('#bag').addEventListener('click',()=>notify('Demo shopping bag: '+bagCount+' item'+(bagCount===1?'':'s')));
+/* KTYRA STUDIO: product-led editorial hero. All image paths match committed GitHub assets. */
+const collections={
+  thobes:{title:'The Classic Thobe',edition:"MEN'S COLLECTION",detail:'A modern expression of timeless form.',folder:'men/thobes/',prefix:'classic-thobe-',items:[
+    {name:'Pearl White',slug:'pearl-white',sw:'#f1eee7',wash:'#b49a80'},
+    {name:'Desert Sand',slug:'desert-sand',sw:'#c9af8f',wash:'#b68a5c'},
+    {name:'Midnight Navy',slug:'midnight-navy',sw:'#253653',wash:'#405b87'},
+    {name:'Graphite',slug:'graphite',sw:'#66666b',wash:'#77747b'},
+    {name:'Onyx Black',slug:'onyx-black',sw:'#252429',wash:'#62535d'}
+  ]},
+  abayas:{title:'The Signature Abaya',edition:"WOMEN'S COLLECTION",detail:'A graceful silhouette, finished with considered detail.',folder:'women/abayas/',prefix:'embroidered-abaya-',items:[
+    {name:'Onyx Black',slug:'onyx',sw:'#242125',wash:'#665560'},
+    {name:'Royal Plum',slug:'plum',sw:'#552639',wash:'#87516d'},
+    {name:'Soft Taupe',slug:'taupe',sw:'#9f8779',wash:'#b09a88'},
+    {name:'Emerald',slug:'emerald',sw:'#115347',wash:'#377568'},
+    {name:'Sand Beige',slug:'sand',sw:'#d6bf9d',wash:'#c9a879'}
+  ]},
+  khimars:{title:'The Full Khimar',edition:"WOMEN'S COLLECTION",detail:'Beautifully full coverage, with fluid movement.',folder:'women/hijabs/',prefix:'full-khimar-',items:[
+    {name:'Onyx Black',slug:'onyx',sw:'#242125',wash:'#665560'},
+    {name:'Royal Plum',slug:'plum',sw:'#552639',wash:'#87516d'},
+    {name:'Soft Taupe',slug:'taupe',sw:'#9f8779',wash:'#b09a88'},
+    {name:'Emerald',slug:'emerald',sw:'#115347',wash:'#377568'},
+    {name:'Sand Beige',slug:'sand',sw:'#d6bf9d',wash:'#c9a879'}
+  ]}
+};
+const hero=document.querySelector('.hero'),switcher=document.getElementById('categorySwitch'),swatches=document.getElementById('swatches');
+let front=document.getElementById('imageFront'),back=document.getElementById('imageBack');
+let category='thobes',index=0,transitionToken=0,toastTimer;
+const productPath=(kind,item)=>'./assets/products/'+collections[kind].folder+collections[kind].prefix+item.slug+'.webp';
+function renderSwatches(){
+  swatches.replaceChildren();
+  collections[category].items.forEach((item,i)=>{
+    const button=document.createElement('button');button.type='button';
+    button.className='swatch'+(i===index?' active':'');
+    button.style.setProperty('--sw',item.sw);
+    button.title=item.name;button.setAttribute('aria-label',item.name);
+    button.setAttribute('aria-pressed',String(i===index));
+    button.addEventListener('click',()=>selectShade(i));
+    swatches.appendChild(button);
+  });
+}
+function selectCategory(next){
+  if(!collections[next] || (next===category && index===0))return;
+  category=next;index=0;render();
+}
+function selectShade(next){const items=collections[category].items;index=(next+items.length)%items.length;render();}
+function render(){
+  const data=collections[category],item=data.items[index];
+  document.getElementById('productEdition').textContent=data.edition;
+  document.getElementById('productTitle').textContent=data.title;
+  document.getElementById('productDetail').textContent=data.detail;
+  document.getElementById('shadeName').textContent=item.name;
+  document.getElementById('slideCount').textContent=String(index+1).padStart(2,'0')+' / '+String(data.items.length).padStart(2,'0');
+  document.getElementById('selectionNumber').textContent=String(index+1).padStart(2,'0')+' — '+String(data.items.length).padStart(2,'0');
+  hero.style.setProperty('--hero-wash',item.wash);
+  switcher.querySelectorAll('[data-category]').forEach(button=>{
+    const active=button.dataset.category===category;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));
+  });
+  renderSwatches();
+  const src=productPath(category,item),alt=item.name+' '+data.title;
+  if(front.getAttribute('src')===src){front.alt=alt;return;}
+  const token=++transitionToken;
+  const nextImage=new Image();
+  nextImage.onload=()=>{
+    if(token!==transitionToken)return;
+    back.src=src;back.alt=alt;back.removeAttribute('aria-hidden');
+    back.classList.add('visible');front.classList.remove('visible');
+    const oldFront=front;front=back;back=oldFront;
+    back.setAttribute('aria-hidden','true');
+  };
+  nextImage.onerror=()=>{if(token===transitionToken)notify('This product image could not be loaded.')};
+  nextImage.src=src;
+}
+function notify(message){let toast=document.getElementById('toast');toast.textContent=message;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),3000)}
+switcher.querySelectorAll('[data-category]').forEach(button=>button.addEventListener('click',()=>selectCategory(button.dataset.category)));
+document.getElementById('prev').addEventListener('click',()=>selectShade(index-1));
+document.getElementById('next').addEventListener('click',()=>selectShade(index+1));
+let swipeX=null;const stage=document.getElementById('stage');
+stage.addEventListener('touchstart',e=>{swipeX=e.changedTouches[0].clientX},{passive:true});
+stage.addEventListener('touchend',e=>{if(swipeX===null)return;const movement=e.changedTouches[0].clientX-swipeX;swipeX=null;if(Math.abs(movement)>50)selectShade(index+(movement<0?1:-1))},{passive:true});
+document.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey||['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(e.key==='ArrowLeft')selectShade(index-1);if(e.key==='ArrowRight')selectShade(index+1)});
+document.getElementById('bag').addEventListener('click',()=>notify('KTYRA STUDIO is a portfolio concept. Shopping is coming later.'));
+render();
