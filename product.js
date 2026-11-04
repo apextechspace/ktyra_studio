@@ -215,3 +215,4 @@ saveCart();renderProduct();
 const savedCurrency=storageRead(CURRENCY_KEY);
 if(['NGN','USD','GBP'].includes(savedCurrency)){currency=savedCurrency;$('currencySelect').value=currency;renderPrice();}
 if(currency!=='NGN')loadFX();
+if(location.hash==='#bag')openBag();
