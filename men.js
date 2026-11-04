@@ -85,13 +85,14 @@ dialog.addEventListener('keydown',event=>{
   const delta=event.key==='ArrowRight'?1:-1;
   selectShade(MEN_SHADES[(current+delta+MEN_SHADES.length)%MEN_SHADES.length].slug);
 });
-const toast=document.getElementById('mensToast');
-document.getElementById('menBag').addEventListener('click',()=>{
-  toast.textContent='Shopping bag and checkout will be introduced in the product-details phase.';
-  toast.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>toast.classList.remove('show'),3200);
-});
+function demoBagCount(){
+ try{
+  const entries=JSON.parse(localStorage.getItem('ktyra-studio-demo-cart-v1')||'[]');
+  return Array.isArray(entries)?entries.reduce((n,x)=>n+(Number.isInteger(x.quantity)&&x.quantity>0&&x.quantity<=10?x.quantity:0),0):0;
+ }catch{return 0;}
+}
+document.querySelector('#menBag span').textContent=String(demoBagCount());
+document.getElementById('menBag').addEventListener('click',()=>{location.href='./product.html#bag';});
 document.querySelectorAll('.mobile-menu-links a').forEach(link=>link.addEventListener('click',()=>{
   const menu=document.querySelector('.mobile-menu');
   if(menu)menu.open=false;
