@@ -150,3 +150,29 @@
   .category-choice{font-size:11px}
   .rail-hint{font-size:8px}
 }
+
+/* Desktop visual QA: preserve the three-column editorial balance.
+   Only restrained, premium refinements; no extra hero content. */
+@media(min-width:1101px){
+  .navlinks{font-size:14px;gap:clamp(22px,2.4vw,38px)}
+  .layout{gap:clamp(20px,2.4vw,42px)}
+  .image-display{width:108%;height:98%;max-width:none;flex:none}
+  .editorial-panel{padding-left:clamp(8px,1.4vw,24px)}
+  .editorial-panel h2{font-size:clamp(34px,3vw,46px);line-height:1.15}
+  .panel-detail{font-size:14px;line-height:1.75;max-width:300px}
+  .category-choice{font-size:12px;padding:11px 13px}
+  .editorial-panel .swatch{width:33px;height:33px}
+  .stage-caption{font-size:11px;letter-spacing:.15em}
+  .card{transition:transform .45s cubic-bezier(.2,.75,.2,1),box-shadow .45s cubic-bezier(.2,.75,.2,1)}
+  .card:hover{transform:translateY(-4px);box-shadow:0 14px 33px #4b36231c}
+  .card-product{transition:transform .6s cubic-bezier(.2,.75,.2,1)}
+  .card:hover .card-product{transform:scale(1.035)}
+}
+@media(min-width:681px){
+  .category-choice:not(.active):hover{background:#fff2e81c;color:#fff}
+  .editorial-panel .swatch:focus-visible{outline:2px solid #fff3e2;outline-offset:5px}
+}
+@media(prefers-reduced-motion:reduce){
+  .card,.card-product{transition:none}
+  .card:hover,.card:hover .card-product{transform:none}
+}
