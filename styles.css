@@ -66,3 +66,113 @@
 .hero-wash{background:var(--hero-wash,#b49a80);opacity:.54;transition:background-color 1.15s cubic-bezier(.2,.75,.2,1)}
 .hero-wash:before{background:radial-gradient(ellipse at 50% 38%,#fff4e02b,transparent 63%),linear-gradient(90deg,#100d0ebf,transparent 47%,#100d0ea6);opacity:1;mix-blend-mode:normal}
 @media(prefers-reduced-motion:reduce){.hero-wash{transition:none}}
+
+/* Navigation accessibility: preserve category navigation on small screens. */
+.mobile-menu{display:none}
+.iconbtn{display:inline-flex;align-items:center;justify-content:center;gap:5px}
+.iconbtn svg{flex:none}
+.iconbtn #count{font-size:11px;font-weight:600}
+.collections .card{scroll-margin-top:24px}
+@media(max-width:680px){
+  .mobile-menu{display:block;position:relative}
+  .mobile-menu summary{list-style:none;display:flex;align-items:center;gap:7px;cursor:pointer;color:#f7eddf;font-size:12px;padding:11px 9px;border:1px solid #ffffff2c;border-radius:22px;user-select:none}
+  .mobile-menu summary::-webkit-details-marker{display:none}
+  .mobile-menu summary:focus-visible{outline:2px solid #f6c17f;outline-offset:3px}
+  .menu-lines{display:flex;flex-direction:column;justify-content:center;gap:3px;width:16px;height:15px}
+  .menu-lines span{display:block;width:100%;height:1.5px;border-radius:2px;background:currentColor}
+  .mobile-menu-links{position:absolute;right:0;top:calc(100% + 9px);width:min(280px,85vw);display:flex;flex-direction:column;gap:0;padding:10px;border:1px solid #f7e7d323;border-radius:16px;background:#211a17f7;box-shadow:0 22px 55px #0008;z-index:20;backdrop-filter:blur(16px)}
+  .mobile-menu-links a{padding:11px 13px;border-radius:9px;color:#f3e9df;font-size:13px}
+  .mobile-menu-links a:hover,.mobile-menu-links a:focus-visible{background:#ffffff18}
+  .navright{gap:8px}
+  .iconbtn{width:45px}
+}
+
+/* Screenshot-informed mobile refinement, Nov 2026
+   Preserve the one-garment editorial hero, improve touch and scannability. */
+.rail-hint{display:none}
+@media(max-width:680px){
+  .nav{padding-left:6%;padding-right:6%;gap:10px}
+  .brand{gap:8px}
+  .brand strong{letter-spacing:.14em}
+  .navright{flex-shrink:0}
+  .copy{padding-top:4px}
+  .copy p{font-size:14px;line-height:1.68;max-width:300px}
+  .copy h1{line-height:1.04;letter-spacing:-.045em}
+  .copy .actions{margin-top:24px}
+  .primary{min-height:46px;display:inline-flex;align-items:center}
+  .stage{height:460px;min-height:460px}
+  .stage-arrow{width:42px;height:42px;top:49%}
+  .stage-caption{font-size:10px;letter-spacing:.13em}
+  .editorial-panel{padding:15px 0 26px}
+  .panel-label,.panel-kicker,.color-heading,.panel-foot{font-size:11px;letter-spacing:.11em}
+  .category-switch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;max-width:380px;gap:3px;margin:16px 0 28px}
+  .category-choice{min-height:43px;font-size:12px;padding:9px 5px;white-space:nowrap}
+  .editorial-panel h2{font-size:clamp(31px,9vw,38px);margin:11px 0}
+  .panel-detail{font-size:14px;line-height:1.7;margin:10px 0 24px;max-width:310px}
+  .color-heading{margin-bottom:18px}
+  .editorial-panel .swatches{gap:16px}
+  .editorial-panel .swatch{width:36px;height:36px;position:relative}
+  .editorial-panel .swatch:before{content:"";position:absolute;inset:-6px}
+  .panel-foot{margin-top:34px;padding-top:17px}
+  .benefits{padding:27px 6%;gap:20px 18px}
+  .benefits div{font-size:12px;line-height:1.45;color:#ded1c4}
+  .benefits strong{font-size:13px;line-height:1.4;margin-bottom:6px}
+  .collections{padding-top:72px;padding-bottom:76px}
+  .sectiontop{margin-bottom:28px}
+  .sectiontop h2{line-height:1.12}
+  .sectiontop p{font-size:14px;line-height:1.65}
+  .cards{gap:15px}
+  .card{min-height:268px;border-radius:14px;padding:23px}
+  .card h3{font-size:clamp(28px,8vw,34px)}
+  .card p{line-height:1.55;max-width:155px}
+  .card-product{width:60%;height:95%;right:-3%}
+  .curated-grid{padding-top:0;padding-bottom:80px}
+  .grid-heading{display:flex;align-items:end;justify-content:space-between;gap:12px}
+  .grid-heading h2{font-size:clamp(31px,8vw,41px);margin:12px 0 24px;max-width:300px}
+  .rail-hint{display:block;color:#8c705a;font-size:9px;letter-spacing:.08em;text-align:right;white-space:nowrap;margin-bottom:28px}
+  .rail-hint span{font-size:14px}
+  .curated-items{display:flex;gap:14px;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x mandatory;scroll-padding-inline:6%;padding-bottom:16px;scrollbar-width:thin;scrollbar-color:#b69d80 transparent}
+  .curated-items article{flex:0 0 min(75vw,300px);scroll-snap-align:start}
+  .curated-items article img{height:315px;border-radius:13px}
+  .curated-items article h3{font-size:22px}
+  .curated-items p{font-size:11px;margin-top:16px}
+  .story{padding:78px 6% 82px}
+  .story p{font-size:14px}
+  footer{padding:25px 6%;font-size:12px;line-height:1.6}
+}
+@media(max-width:360px){
+  .brand strong{font-size:14px}
+  .brand small{font-size:7px}
+  .mark{width:34px;height:34px;font-size:25px}
+  .mobile-menu summary{font-size:11px;gap:5px;padding:10px 7px}
+  .iconbtn{width:41px}
+  .stage{height:415px;min-height:415px}
+  .category-choice{font-size:11px}
+  .rail-hint{font-size:8px}
+}
+
+/* Desktop visual QA: preserve the three-column editorial balance.
+   Only restrained, premium refinements; no extra hero content. */
+@media(min-width:1101px){
+  .navlinks{font-size:14px;gap:clamp(22px,2.4vw,38px)}
+  .layout{gap:clamp(20px,2.4vw,42px)}
+  .image-display{width:108%;height:98%;max-width:none;flex:none}
+  .editorial-panel{padding-left:clamp(8px,1.4vw,24px)}
+  .editorial-panel h2{font-size:clamp(34px,3vw,46px);line-height:1.15}
+  .panel-detail{font-size:14px;line-height:1.75;max-width:300px}
+  .category-choice{font-size:12px;padding:11px 13px}
+  .editorial-panel .swatch{width:33px;height:33px}
+  .stage-caption{font-size:11px;letter-spacing:.15em}
+  .card{transition:transform .45s cubic-bezier(.2,.75,.2,1),box-shadow .45s cubic-bezier(.2,.75,.2,1)}
+  .card:hover{transform:translateY(-4px);box-shadow:0 14px 33px #4b36231c}
+  .card-product{transition:transform .6s cubic-bezier(.2,.75,.2,1)}
+  .card:hover .card-product{transform:scale(1.035)}
+}
+@media(min-width:681px){
+  .category-choice:not(.active):hover{background:#fff2e81c;color:#fff}
+  .editorial-panel .swatch:focus-visible{outline:2px solid #fff3e2;outline-offset:5px}
+}
+@media(prefers-reduced-motion:reduce){
+  .card,.card-product{transition:none}
+  .card:hover,.card:hover .card-product{transform:none}
+}
