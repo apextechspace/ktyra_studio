@@ -144,12 +144,14 @@ document.querySelectorAll('[data-select-category]').forEach(link=>link.addEventL
 const categoryFromQuery=new URLSearchParams(window.location.search).get('category');
 if(validCategory(categoryFromQuery))selectedCategory=categoryFromQuery;
 setCategory(selectedCategory);
-document.getElementById('womenBag').addEventListener('click',()=>{
-  toast.textContent='The shopping bag will be available in the product-details phase.';
-  toast.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>toast.classList.remove('show'),3200);
-});
+function demoBagCount(){
+ try{
+  const entries=JSON.parse(localStorage.getItem('ktyra-studio-demo-cart-v1')||'[]');
+  return Array.isArray(entries)?entries.reduce((n,x)=>n+(Number.isInteger(x.quantity)&&x.quantity>0&&x.quantity<=10?x.quantity:0),0):0;
+ }catch{return 0;}
+}
+document.querySelector('#womenBag span').textContent=String(demoBagCount());
+document.getElementById('womenBag').addEventListener('click',()=>{location.href='./product.html#bag';});
 document.querySelectorAll('.mobile-menu-links a').forEach(link=>link.addEventListener('click',()=>{
   const menu=document.querySelector('.mobile-menu');
   if(menu)menu.open=false;
