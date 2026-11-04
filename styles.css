@@ -526,3 +526,15 @@
 /* Collection-card destinations: full-card keyboard and touch targets. */
 .card-hit{position:absolute;inset:0;z-index:4;display:block;border-radius:inherit}
 .card:focus-within{outline:2px solid #ae845d;outline-offset:4px}
+
+/* Small, consistent exploration links in the existing page footers. */
+.site-footer-links{display:flex;align-items:center;justify-content:center;gap:clamp(12px,2vw,30px);flex-wrap:wrap;font-size:11px;font-weight:600}
+.site-footer-links a{color:#e0cbb6;white-space:nowrap}
+.site-footer-links a:hover{color:#f5bb7e}
+@media(min-width:681px) and (max-width:1120px){
+ .navlinks{gap:clamp(11px,1.3vw,20px)}
+ .navlinks a{font-size:11px}
+}
+@media(max-width:680px){
+ .site-footer-links{justify-content:flex-start;gap:18px}
+}
