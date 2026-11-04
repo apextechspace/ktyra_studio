@@ -49,7 +49,7 @@ function render(){
   document.getElementById('productEdition').textContent=data.edition;
   document.getElementById('productTitle').textContent=data.title;
   document.getElementById('productDetail').textContent=data.detail;
-  document.getElementById('collectionLink').href=category==='thobes'?'./men.html':category==='abayas'?'#women-collection':'#khimars-collection';
+  document.getElementById('collectionLink').href=category==='thobes'?'./men.html':category==='abayas'?'./women.html?category=abayas#collection':'./women.html?category=khimars#collection';
   document.getElementById('shadeName').textContent=item.name;
   document.getElementById('slideCount').textContent=String(index+1).padStart(2,'0')+' / '+String(data.items.length).padStart(2,'0');
   document.getElementById('selectionNumber').textContent=String(index+1).padStart(2,'0')+' — '+String(data.items.length).padStart(2,'0');
