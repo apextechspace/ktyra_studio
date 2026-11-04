@@ -61,3 +61,8 @@
 @media(max-width:1100px){.layout{grid-template-columns:minmax(240px,1fr) minmax(320px,1.1fr)}.editorial-panel{grid-column:1/-1;max-width:650px;width:100%;margin:auto;display:block;padding:0 0 42px}.stage{height:650px}.category-switch{margin-bottom:24px}.panel-detail{margin-bottom:25px}.panel-foot{margin-top:28px}}
 @media(max-width:680px){.layout{display:flex;flex-direction:column;gap:0}.copy h1{font-size:clamp(48px,12vw,70px)}.stage{height:490px;min-height:490px}.image-display{height:95%}.editorial-panel{max-width:100%;padding:16px 0 15px}.category-switch{margin:14px 0 25px}.category-choice{padding:9px 10px}.editorial-panel h2{font-size:32px}.stage-caption{left:12%;right:12%}.card-product{height:95%;width:58%}.curated-grid{padding:0 6% 70px}.curated-items{grid-template-columns:1fr 1fr;gap:15px}.curated-items article img{height:250px}.curated-items article h3{font-size:19px}}
 @media(prefers-reduced-motion:reduce){.image-display{animation:none}.product-photo,.hero-wash,.hero-wash:before{transition:none}}
+
+/* GPU-friendly ambient wash: interpolate one flat color beneath a stable gradient. */
+.hero-wash{background:var(--hero-wash,#b49a80);opacity:.54;transition:background-color 1.15s cubic-bezier(.2,.75,.2,1)}
+.hero-wash:before{background:radial-gradient(ellipse at 50% 38%,#fff4e02b,transparent 63%),linear-gradient(90deg,#100d0ebf,transparent 47%,#100d0ea6);opacity:1;mix-blend-mode:normal}
+@media(prefers-reduced-motion:reduce){.hero-wash{transition:none}}
