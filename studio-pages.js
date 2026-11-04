@@ -31,7 +31,7 @@ if(contactForm){
  contactForm.addEventListener('submit',event=>{
   event.preventDefault();
   if(!contactForm.checkValidity()){contactForm.reportValidity();return;}
-  // No fetch(), analytics, localStorage or email actions. This is UI-only.
+  // No network requests, analytics, storage, or email actions. This is UI-only.
   // Discard all form entries immediately; only a visual confirmation remains.
   contactForm.reset();
   card.hidden=true;
