@@ -2,56 +2,12 @@
 /* KTYRA STUDIO — frontend-only product detail prototype.
    All NGN prices below are DEMO values (not offers or actual merchant pricing).
    Checkout, stock, payment processing and international settlement are NOT implemented. */
-const PRODUCTS={
-  thobes:{
-    title:'The Classic Thobe',headline:'The Classic <em>Thobe.</em>',
-    categoryLabel:"THE MEN'S EDIT",collectionLabel:"Men's Collection",collectionUrl:'./men.html',
-    description:'A contemporary interpretation of timeless form. A clean, considered silhouette designed to carry presence.',
-    details:'Refined lines, coordinating headwear and understated character. This concept image illustrates the proposed aesthetic, not an available SKU.',
-    folder:'men/thobes/',prefix:'classic-thobe-',demoPriceNGN:95000,sizes:['S','M','L','XL'],
-    shades:[
-      ['pearl-white','Pearl White','#f1eee7'],
-      ['desert-sand','Desert Sand','#c9af8f'],
-      ['midnight-navy','Midnight Navy','#253653'],
-      ['graphite','Graphite','#66666b'],
-      ['onyx-black','Onyx Black','#252429']
-    ]
-  },
-  abayas:{
-    title:'The Signature Abaya',headline:'The Signature <em>Abaya.</em>',
-    categoryLabel:"THE WOMEN'S EDIT",collectionLabel:'Signature Abayas',collectionUrl:'./women.html?category=abayas#collection',
-    description:'A flowing expression of understated elegance, with signature embroidery and considered detail.',
-    details:'An embroidered full-length abaya concept featuring elegant proportions and a refined finish. Exact fabric specifications require verification before launch.',
-    folder:'women/abayas/',prefix:'embroidered-abaya-',demoPriceNGN:140000,sizes:['S','M','L','XL'],
-    shades:[
-      ['onyx','Onyx Black','#252429'],
-      ['plum','Royal Plum','#552639'],
-      ['taupe','Soft Taupe','#9f8779'],
-      ['emerald','Emerald','#115347'],
-      ['sand','Sand Beige','#d6bf9d']
-    ]
-  },
-  khimars:{
-    title:'The Full Khimar',headline:'The Full <em>Khimar.</em>',
-    categoryLabel:"THE WOMEN'S EDIT",collectionLabel:'Full Khimars',collectionUrl:'./women.html?category=khimars#collection',
-    description:'Beautifully full coverage and graceful movement in a fluid, effortlessly modest silhouette.',
-    details:'Full-length coverage with generous draping. Shown as a one-size concept; real garment measurements and sizing remain to be specified.',
-    folder:'women/hijabs/',prefix:'full-khimar-',demoPriceNGN:82000,sizes:['One size'],
-    shades:[
-      ['onyx','Onyx Black','#252429'],
-      ['plum','Royal Plum','#552639'],
-      ['taupe','Soft Taupe','#9f8779'],
-      ['emerald','Emerald','#115347'],
-      ['sand','Sand Beige','#d6bf9d']
-    ]
-  }
-};
-const CART_KEY='ktyra-studio-demo-cart-v1',FX_KEY='ktyra-studio-ngn-fx-v1',CURRENCY_KEY='ktyra-studio-currency-v1';
+const {PRODUCTS,CART_KEY,CURRENCY_KEY}=window.KTYRA_SHOP;
 const qs=new URLSearchParams(location.search);
 let category=Object.hasOwn(PRODUCTS,qs.get('category'))?qs.get('category'):'thobes';
 let product=PRODUCTS[category];
 let shade=product.shades.find(s=>s[0]===qs.get('shade'))||product.shades[0];
-let qty=1,cart=[],fxRates=null,fxUpdateTime=null,toastTimer;
+let qty=1,cart=[],toastTimer;
 let currency='NGN';
 const $=id=>document.getElementById(id);
 function storageRead(key){try{return localStorage.getItem(key);}catch{return null;}}
@@ -81,45 +37,10 @@ function showToast(message){
   toastTimer=setTimeout(()=>$('productToast').classList.remove('show'),2800);
 }
 function renderPrice(){
-  const base=product.demoPriceNGN;
-  const rate=fxRates&&Number(fxRates[currency]);
-  if(currency==='NGN'||!Number.isFinite(rate)||rate<=0){
-    $('productPrice').textContent=currencyAmount(base,'NGN');
-    $('rateNotice').textContent='Illustrative NGN price only. No purchase or payment is being processed.';
-    if(currency!=='NGN')$('rateNotice').textContent='Currency reference rate unavailable. Showing the NGN demo price instead.';
-    return;
-  }
-  $('productPrice').textContent=currencyAmount(base*rate,currency);
-  $('rateNotice').textContent='Indicative conversion from the illustrative NGN price; not a checkout quote. Reference rate updated '+(fxUpdateTime||'recently')+'. ';
-  const link=document.createElement('a');
-  link.href='https://www.exchangerate-api.com';
-  link.target='_blank';link.rel='noopener noreferrer';
-  link.textContent='Rates By Exchange Rate API';
-  $('rateNotice').appendChild(link);
-}
-function restoreFX(){
-  try{
-    const cached=JSON.parse(storageRead(FX_KEY)||'null');
-    if(cached&&Date.now()-cached.savedAt<24*60*60*1000&&Number(cached.rates?.USD)>0&&Number(cached.rates?.GBP)>0){
-      fxRates=cached.rates;fxUpdateTime=cached.updated;return true;
-    }
-  }catch{}
-  return false;
-}
-async function loadFX(){
-  if(restoreFX()){renderPrice();return;}
-  try{
-    const resp=await fetch('https://open.er-api.com/v6/latest/NGN',{headers:{Accept:'application/json'}});
-    if(!resp.ok)throw new Error('FX unavailable');
-    const data=await resp.json();
-    if(data.result!=='success'||data.base_code!=='NGN'||!(data.rates?.USD>0)||!(data.rates?.GBP>0))throw new Error('FX invalid');
-    fxRates={USD:data.rates.USD,GBP:data.rates.GBP};
-    fxUpdateTime=new Date(data.time_last_update_unix*1000).toLocaleDateString('en-GB');
-    storageWrite(FX_KEY,JSON.stringify({rates:fxRates,updated:fxUpdateTime,savedAt:Date.now()}));
-    renderPrice();
-  }catch{
-    if(currency!=='NGN'){$('rateNotice').textContent='Reference currency rates are unavailable. Showing the NGN demo price.';renderPrice();}
-  }
+  $('productPrice').textContent=window.KTYRA_SHOP.formatDemoPrice(product.demoPriceNGN,currency);
+  $('rateNotice').textContent=currency==='NGN'
+    ?'Illustrative NGN price only. This is a design demonstration — no payment is processed.'
+    :'Illustrative '+currency+' display using a fixed, fictional exchange rate. Not live FX and not a checkout quote.';
 }
 function renderShades(){
   $('shadeButtons').replaceChildren();
@@ -192,6 +113,7 @@ function renderBag(){
     label.append(title,desc);price.append(amt,remove);row.append(img,label,price);body.appendChild(row);
   }
   $('bagTotal').textContent=currencyAmount(total);
+  $('proceedCheckout').hidden=cart.length===0;
 }
 function openBag(){renderBag();if(!$('bagDialog').open)$('bagDialog').showModal();}
 $('openBag').addEventListener('click',openBag);
@@ -206,7 +128,6 @@ $('currencySelect').addEventListener('change',()=>{
   currency=$('currencySelect').value;
   storageWrite(CURRENCY_KEY,currency);
   renderPrice();
-  if(currency!=='NGN'&&!fxRates)loadFX();
 });
 for(const link of document.querySelectorAll('.mobile-menu-links a'))link.addEventListener('click',()=>{
   const menu=document.querySelector('.mobile-menu');if(menu)menu.open=false;
@@ -214,5 +135,4 @@ for(const link of document.querySelectorAll('.mobile-menu-links a'))link.addEven
 saveCart();renderProduct();
 const savedCurrency=storageRead(CURRENCY_KEY);
 if(['NGN','USD','GBP'].includes(savedCurrency)){currency=savedCurrency;$('currencySelect').value=currency;renderPrice();}
-if(currency!=='NGN')loadFX();
 if(location.hash==='#bag')openBag();
