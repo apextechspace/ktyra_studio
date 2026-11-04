@@ -33,7 +33,7 @@ function renderProducts(){
       '<p class="men-product__kicker">THE CLASSIC THOBE</p>'+
       '<h3>'+item.name+'</h3>'+
       '<p class="men-product__sub">'+item.note+'</p>'+
-    '</div><span class="men-product__swatch" style="--shade:'+item.hex+'" aria-label="'+item.name+' color swatch" role="img"></span></div>'+
+    '<a class="product-details-link" href="./product.html?category=thobes&shade='+item.slug+'" aria-label="View product details for '+item.name+' Classic Thobe">View details ↗</a></div><span class="men-product__swatch" style="--shade:'+item.hex+'" aria-label="'+item.name+' color swatch" role="img"></span></div>'+
     '</article>';
   }).join('');
   count.textContent='Showing '+visible.length+' '+(visible.length===1?'shade':'shades');
@@ -59,6 +59,7 @@ function selectShade(slug){
   previewImage.alt=found.name+' Classic Thobe';
   previewName.textContent='The Classic Thobe';
   previewShade.textContent=found.name;
+  document.getElementById('previewProductLink').href='./product.html?category=thobes&shade='+encodeURIComponent(found.slug);
   renderModalSwatches();
 }
 function openPreview(slug){
