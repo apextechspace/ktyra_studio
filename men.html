@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1b1513">
+<meta name="description" content="Explore KTYRA STUDIO's men's collection: the classic thobe in five considered shades, from Pearl White to Onyx Black.">
+<meta property="og:title" content="Men's Collection | KTYRA STUDIO">
+<meta property="og:description" content="Heritage, with intention. Explore five considered shades of the Classic Thobe.">
+<title>Men's Collection | KTYRA STUDIO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./men.css">
+<script src="./men.js" defer></script>
+</head>
+<body class="mens-page">
+<header class="mens-header">
+<nav class="nav" aria-label="Primary navigation">
+  <a class="brand" href="./index.html" aria-label="KTYRA Studio — homepage"><span class="mark" aria-hidden="true">K</span><span><strong>KTYRA</strong><small>STUDIO</small></span></a>
+  <div class="navlinks"><a href="./index.html">Home</a><a href="./index.html#collections">Collections</a><a href="./men.html" aria-current="page">Men</a><a href="./index.html#women-collection">Women</a><a href="./index.html#story">Our Story</a></div>
+  <div class="navright">
+    <button type="button" class="iconbtn mens-bag" id="menBag" aria-label="Shopping bag preview"><svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h16l-1 12H5L4 8Z"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/></svg><span>0</span></button>
+    <details class="mobile-menu"><summary aria-label="Open navigation menu"><span class="menu-lines" aria-hidden="true"><span></span><span></span><span></span></span><span>Menu</span></summary>
+      <nav class="mobile-menu-links" aria-label="Mobile navigation"><a href="./index.html">Home</a><a href="./index.html#collections">Collections</a><a href="./men.html" aria-current="page">Men's Thobes</a><a href="./index.html#women-collection">Women's Abayas</a><a href="./index.html#khimars-collection">Full Khimars</a><a href="./index.html#story">Our Story</a></nav>
+    </details>
+  </div>
+</nav>
+</header>
+<main>
+  <section class="mens-hero" aria-labelledby="mens-title">
+    <div class="mens-hero__inner">
+      <div class="mens-hero__copy">
+        <div class="mens-breadcrumb"><a href="./index.html">Home</a><span aria-hidden="true">/</span><span>Men's Collection</span></div>
+        <p class="mens-overline">THE HERITAGE COLLECTION <span aria-hidden="true">—</span> 01</p>
+        <h1 id="mens-title">Made to <em>carry presence.</em></h1>
+        <p class="mens-hero__lead">A modern expression of timeless form. One signature silhouette, five considered shades — from quiet neutrals to commanding dark tones.</p>
+        <a class="mens-hero__link" href="#the-edit">Discover the collection <span aria-hidden="true">↗</span></a>
+        <div class="mens-hero__foot"><span>CLASSIC THOBE / FIVE SHADES</span><span>WEAR YOUR PRESENCE</span></div>
+      </div>
+      <div class="mens-hero__visual">
+        <div class="mens-hero__arch" aria-hidden="true"></div>
+        <img src="./assets/products/men/thobes/classic-thobe-pearl-white.webp" width="760" height="1040" alt="Pearl White Classic Thobe, a faceless full-length garment with matching headwear" fetchpriority="high">
+        <span class="mens-hero__image-label">THE CLASSIC THOBE <span aria-hidden="true">/</span> PEARL WHITE</span>
+      </div>
+    </div>
+  </section>
+  <section class="mens-edit" id="the-edit" aria-labelledby="edit-title">
+    <div class="mens-edit__top">
+      <div>
+        <p class="mens-overline mens-overline--warm">THE MEN'S EDIT / 2026</p>
+        <h2 id="edit-title">The Classic <em>Thobe.</em></h2>
+        <p class="mens-edit__description">An exploration of tone and restraint. Discover the five shades in the signature collection.</p>
+      </div>
+      <div class="mens-edit__meta"><span>01 SIGNATURE SILHOUETTE</span><span>05 COLORWAYS</span></div>
+    </div>
+    <div class="mens-tools">
+      <div class="mens-filters" role="group" aria-label="Filter garments by shade">
+        <button type="button" class="mens-filter active" data-filter="all" aria-pressed="true">All shades</button>
+        <button type="button" class="mens-filter" data-filter="light" aria-pressed="false">Light neutrals</button>
+        <button type="button" class="mens-filter" data-filter="dark" aria-pressed="false">Deep tones</button>
+      </div>
+      <p class="mens-results" id="resultsCount" aria-live="polite">Showing 5 shades</p>
+    </div>
+    <div class="mens-products" id="mensProducts" aria-label="Classic Thobe colorways">
+      <noscript><p>Enable JavaScript to browse the colorway previews. The full garment imagery is available in the homepage interactive showcase.</p></noscript>
+    </div>
+    <div class="mens-edit__closing"><span>TIMELESS FORM. CONSIDERED COLOUR.</span><a href="./index.html#mens-edit">Return to the story <span aria-hidden="true">↗</span></a></div>
+  </section>
+  <section class="mens-statement" aria-labelledby="statement-title">
+    <span class="mens-overline">A DISTINCTIVE PRESENCE</span>
+    <h2 id="statement-title">Tradition doesn't follow trends.<br><em>It defines its own.</em></h2>
+    <a href="./index.html">Back to KTYRA STUDIO <span aria-hidden="true">↗</span></a>
+  </section>
+</main>
+<footer class="mens-footer"><span>© 2026 KTYRA STUDIO · Portfolio concept</span><span>Designed &amp; developed as a KTYRA Technologies showcase</span></footer>
+<dialog class="men-preview" id="menPreview" aria-labelledby="previewName">
+  <button type="button" class="men-preview__close" id="previewClose" aria-label="Close garment preview">×</button>
+  <div class="men-preview__grid">
+    <div class="men-preview__visual"><img id="previewImage" src="./assets/products/men/thobes/classic-thobe-pearl-white.webp" alt="Pearl White Classic Thobe" width="760" height="1040"></div>
+    <div class="men-preview__copy">
+      <p class="mens-overline mens-overline--warm">KTYRA STUDIO / THE MEN'S EDIT</p>
+      <h2 id="previewName">The Classic Thobe</h2>
+      <p class="men-preview__shade" id="previewShade">Pearl White</p>
+      <p class="men-preview__description">A considered expression of traditional form, presented in five distinctive shades.</p>
+      <div class="men-preview__separator"></div>
+      <p class="men-preview__label">DISCOVER A SHADE</p>
+      <div class="men-preview__swatches" id="previewSwatches" role="group" aria-label="Choose a garment shade"></div>
+      <p class="men-preview__note">Concept collection preview. Pricing, sizing and checkout will be introduced with the product-details experience.</p>
+      <button type="button" class="men-preview__back" id="previewBack">Continue exploring <span aria-hidden="true">↗</span></button>
+    </div>
+  </div>
+</dialog>
+<div class="mens-toast" id="mensToast" role="status" aria-live="polite"></div>
+</body>
+</html>
